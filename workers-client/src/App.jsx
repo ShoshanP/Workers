@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import AllEmployees from './employee/allEmployees'
 import AddEmployeeForm from './employee/AddEmployeeForm'
+import ButtonAppBar from './navBar'
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
   return (
     <>
       
-
+<ButtonAppBar></ButtonAppBar>
       <AllEmployees></AllEmployees>
 
     </>

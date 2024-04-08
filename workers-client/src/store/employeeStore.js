@@ -79,9 +79,10 @@ class EmployeeStore {
         try {
             const response = await EmlpyeeAPI.put(id, data);
             runInAction(() => {
-                employees.forEach((element, index) => {
+                this.employees.forEach((element, index) => {
                     if (element.id === id) {
-                        data[index] = response.data;
+                        this.employees[index] = response.data;
+                        
                     }
                 });
             });

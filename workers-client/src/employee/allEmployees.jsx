@@ -6,7 +6,6 @@ import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import { Button } from '@material-ui/core'
 
-
 import employeeStore from "../store/employeeStore";
 import ExpandableRowContent from "./Roles";
 import AddEmployeeForm from "./AddEmployeeForm";
@@ -16,6 +15,8 @@ const ExpandableRowTable = observer(() => {
   const [employeeToEdit,setEmployeeToEdit]=useState();
   //let employeeToEdit;
   const closeDialog = () => {
+    employeeStore.requiredEmployee? employeeStore.requiredEmployee.roles= []:employeeStore.requiredEmployee=undefined; 
+    employeeStore.requiredEmployee = undefined;
     setAddEmployee(false);
   }
   function openDialog() {

@@ -4,25 +4,27 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
-import { Button } from '@material-ui/core'
+import { Button } from "@material-ui/core";
 
 import employeeStore from "../store/employeeStore";
 import ExpandableRowContent from "./Roles";
 import AddEmployeeForm from "./AddEmployeeForm";
 
 const ExpandableRowTable = observer(() => {
-  const [addEmployee, setAddEmployee ] = useState(false);
-  const [employeeToEdit,setEmployeeToEdit]=useState();
+  const [addEmployee, setAddEmployee] = useState(false);
+  const [employeeToEdit, setEmployeeToEdit] = useState();
   //let employeeToEdit;
   const closeDialog = () => {
-    employeeStore.requiredEmployee? employeeStore.requiredEmployee.roles= []:employeeStore.requiredEmployee=undefined; 
+    employeeStore.requiredEmployee
+      ? (employeeStore.requiredEmployee.roles = [])
+      : (employeeStore.requiredEmployee = undefined);
     employeeStore.requiredEmployee = undefined;
     setAddEmployee(false);
-  }
+  };
   function openDialog() {
     setAddEmployee(true);
   }
- 
+
   const columns = [
     { name: "firstName" },
     { name: "lastName" },
@@ -51,18 +53,17 @@ const ExpandableRowTable = observer(() => {
 
   const data = toJS(employeeStore.employees);
 
-   function handleEdit (rowData) {
-   console.log(rowData[2]);
-   const IDemployeeToEdit = employeeStore.getIdByIdnumber(rowData[2]);
-   console.log(IDemployeeToEdit)
-   employeeStore.getDataById(IDemployeeToEdit);
+  function handleEdit(rowData) {
+    console.log(rowData[2]);
+    const IDemployeeToEdit = employeeStore.getIdByIdnumber(rowData[2]);
+    console.log(IDemployeeToEdit);
+    employeeStore.getDataById(IDemployeeToEdit);
     //setEmployeeToEdit (employeeStore.requiredEmployee);
     console.log("Edit clicked for row:", employeeToEdit);
     openDialog();
+  }
 
-  };
-
-  const handleDelete = async rowData => {
+  const handleDelete = async (rowData) => {
     const idToDelete = employeeStore.getIdByIdnumber(rowData[2]);
     await employeeStore.daleteData(idToDelete);
   };
@@ -93,18 +94,21 @@ const ExpandableRowTable = observer(() => {
 
   return (
     <>
-    <Button variant="contained" color="primary" onClick={openDialog}>
+      <Button variant="contained" color="primary" onClick={openDialog}>
         Add Employee
       </Button>
-      {addEmployee && <AddEmployeeForm handleClose={closeDialog} isOpen={addEmployee} ></AddEmployeeForm>}
+      {addEmployee && (
+        <AddEmployeeForm
+          handleClose={closeDialog}
+          isOpen={addEmployee}
+        ></AddEmployeeForm>
+      )}
       <MUIDataTable
         title={"Your worker list:"}
         data={data}
         columns={columns}
         options={options}
       />
-  
-
     </>
   );
 });

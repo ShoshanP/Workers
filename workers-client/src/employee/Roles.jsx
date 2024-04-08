@@ -5,10 +5,10 @@ import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
-import AddEmployeeForm from './AddEmployeeForm';
-import { Done } from "@material-ui/icons";
+import AddEmployeeForm from "./AddEmployeeForm";
+
 const ExpandableRowContent = ({ roles }) => {
-  const [addEmployee,setAddEmployee]=useState(false);
+  const [addEmployee, setAddEmployee] = useState(false);
   return (
     <>
       <TableRow>
@@ -16,7 +16,7 @@ const ExpandableRowContent = ({ roles }) => {
           <TableContainer component={Paper}>
             <Table>
               <TableBody>
-                {roles.map(role => (
+                {roles.map((role) => (
                   <TableRow key={role.name}>
                     <TableCell align="right">{role.name}</TableCell>
                     <TableCell align="right">
